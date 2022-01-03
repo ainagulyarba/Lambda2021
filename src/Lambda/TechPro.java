@@ -1,4 +1,4 @@
-package Lambda.Lambda01;
+package Lambda;
 
 public class TechPro {
 

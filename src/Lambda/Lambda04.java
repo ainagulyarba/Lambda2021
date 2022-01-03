@@ -1,4 +1,4 @@
-package Lambda.Lambda01;
+package Lambda;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,6 +31,12 @@ public class Lambda04 {
         System.out.println(batchOrt95BykBatchOgrcSayiToplami1(list));//267
         System.out.println("****");
         System.out.println(ogrcSayi130BykBatchOgrcBatchOrtalamasi( list));//OptionalDouble[95.33333333333333]
+        System.out.println("****");
+        System.out.println(gunduzBatchSayisi(list));//2
+        System.out.println("****");
+        System.out.println(ogrSayisi130FazlaEnBuykBatch(list));//OptionalInt[98]
+        System.out.println("****");
+        System.out.println(ogrSayisi150AzBatchEnKckBatchOrt( list));//95
     }
 
     //task01--> batch ort'larinin 92 den buyuk oldugunu kontrol eden prog creat ediniz
@@ -100,6 +106,7 @@ public class Lambda04 {
                 mapToInt(t->t.getOgrcSayisi()).//mapToInt()-->type'ne gore int return eder ki
                 sum();// sum() calisir reduce gerek kalmaz daha kisa ve hizli
     }
+
     //task08--> ogrc sayilari 130 buyuk olan batch'lerin batch ortalamalarinin ortamayi bulunuz
     public static OptionalDouble ogrcSayi130BykBatchOgrcBatchOrtalamasi(List<TechPro> list) {
         return list.
@@ -107,5 +114,27 @@ public class Lambda04 {
                 filter(t -> t.getOgrcSayisi()>130).// ogrc sayisi 130 dan buyuk sarti saglandi
                 mapToDouble(t->t.getBatchOrt()).//map Data update eder trans degisiklik//ortaya baska bisey cikarsa
                 average();//ortalamayi veriyor
+    }
+
+    //task 09-->gunduz batch'lerinin sayisini  yazdiriniz.
+    public static int gunduzBatchSayisi(List<TechPro> list){
+      return (int)  list.stream().filter(t->t.getBatchName().contains("gunduz")).count();
+    }
+
+    //task 10-->Ogrenci sayilari 130'dan fazla olan batch'lerin en buyuk batch ort'unu bulunuz
+    public static OptionalInt ogrSayisi130FazlaEnBuykBatch(List<TechPro> list){
+    return  list.stream().
+            filter(t->t.getOgrcSayisi()>130).
+            mapToInt(TechPro::getBatchOrt).
+            max();
+}
+
+    //task 11-->Ogrenci sayilari 150'dan az olan batch'lerin en kucuk batch ort'unu bulunuz.
+    public static int ogrSayisi150AzBatchEnKckBatchOrt(List<TechPro> list){
+        return  list.stream().
+                filter(t->t.getOgrcSayisi()<150).
+                mapToInt(TechPro::getBatchOrt).
+                min().
+                getAsInt();//-->ciktiyi int type olarak return eder
     }
 }

@@ -1,4 +1,6 @@
-package Lambda.Lambda01;
+package Lambda;
+
+import Lambda.Lambda01;
 
 import java.util.ArrayList;
 import java.util.Arrays;
